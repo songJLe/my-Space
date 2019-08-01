@@ -21,7 +21,6 @@ export default {
   data() {
     return {
       navArr: this.listarr,
-      msg: 'Nav zhe shi yi ge dao hang',
       toggleHide: true
     }
   },
@@ -62,7 +61,7 @@ export default {
   .el-icon-caret-right{
     position: absolute;
     right:-10px;
-    top:55%;
+    top:53%;
     font-size: 20px;
     color:green; 
   }

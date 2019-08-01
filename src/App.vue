@@ -15,12 +15,12 @@
 <script>
 import Loading from '@/components/loading/index'
 import navlist from '@/components/nav'
+import {mapState} from 'vuex'
 export default {
   name: 'app',
   data() {
     return {
-      isLoading: true,
-      num:1,
+      isLoading: false,
       navArr: [
         { title: 'one', url: '/' },
         { title: 'two', url: '/two' },
@@ -28,21 +28,22 @@ export default {
       ]
     }
   },
-  mounted() {
-    setInterval(() => {
-        this.num++ 
-        if(this.num>=5){
-          this.isLoading = false
-        }
-      }, 1000);
-  },
-   methosd:{
-    
-  },
   components: {
     navlist,
     Loading  
-  }
+  },
+   computed:{
+      ...mapState(["loadLength"]),//监听loadLength的变化
+   },
+   watch: {
+     loadLength(){
+       if(this.$store.getters.getters_loadLength == false){
+          setTimeout(() => {
+            this.isLoading = false
+          }, 3000);
+        } 
+     }
+   },
 }
 </script>
 
@@ -54,6 +55,7 @@ body{
   overflow: hidden;
   margin: 0;
   padding: 0;
+  background: rgb(220, 245, 241); 
 } 
 a {
   text-decoration: none;
@@ -62,13 +64,14 @@ a {
   height: 800px;
   position: fixed;
   top:-300px;
-  left: 0;
+  left: -30px;
   overflow: hidden;
   transform: rotate(45deg); 
+  z-index: 99;
 }
 .el-main{
-  margin-left: 64px;
   text-align: center;
+  padding: 0;
 }
 .fade-enter,
 .fade-leave-active {
@@ -76,6 +79,6 @@ a {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 1s;
 }
 </style>
