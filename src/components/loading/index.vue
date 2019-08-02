@@ -46,7 +46,7 @@ export default {
     loadingTime:function (params) {
       var _this = this 
       var dayOfWeekPastIndex = Math.floor(_this.weekdays.length * Math.random())
-      var dayOfWeekIndex = new Date().getDate()
+      var dayOfWeekIndex = new Date().getDay()
       var dayOfWeekPast = _this.weekdays[dayOfWeekPastIndex];
       var dayOfWeek = _this.weekdays[dayOfWeekIndex];
       var hourOfDay = new Date().getHours();
