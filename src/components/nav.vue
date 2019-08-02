@@ -1,37 +1,45 @@
 <template>
   <div class="nav">  
-  <nav @mouseenter="isToggleHide" @mouseleave="isToggleShow">
-    <el-menu default-active="0" class="el-menu-vertical-demo" :collapse="toggleHide">
+  <nav>
+    <el-menu default-active="0" class="el-menu-vertical-demo" :collapse="toggleHides">
       <el-menu-item v-for="(item, index) in navArr" :index="index.toString()" :key="index">
         <router-link :to="item.url" style="color:#000;">
         <i class="el-icon-menu"></i> 
         <span>{{item.title}}</span>
         </router-link>
       </el-menu-item>
-      <div class="el-icon-caret-right"></div>
     </el-menu>
     </nav>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'Nav',
   props: ['listarr'],
   data() {
     return {
       navArr: this.listarr,
-      toggleHide: true
+      toggleHides: ''
     }
   },
   methods: {
-    isToggleShow (){ 
-      this.toggleHide = true 
-    },
-    isToggleHide (){ 
-      this.toggleHide = false
+    // isToggleShow (){ 
+    //   this.toggleHide = true 
+    // },
+    // isToggleHide (){ 
+    //   this.toggleHide = false
+    // }
+  },
+  computed:{
+      ...mapState(["toggleHide"]),//监听toggleHide的变化
+   },
+  watch: {
+    toggleHide(){
+      this.toggleHides = this.$store.getters.getters_toggleHide
     }
-  }
+  },
 }
 </script>
 
@@ -44,12 +52,16 @@ export default {
     margin-top: 300px;
   }
   nav ul li{
-    width: 80%;
+    width: 60%;
     transform: rotate(-45deg);
     float: right;
   }
   .el-menu{
-    max-width: 90%;
+    width: 500px;
+    z-index: 99;
+  }
+  .el-menu-item{
+    padding-left: 50px !important;
   }
   .el-menu-item.is-active a span{
     color:green;
@@ -58,11 +70,7 @@ export default {
   .el-menu-item a{
     display: block;
   } 
-  .el-icon-caret-right{
-    position: absolute;
-    right:-10px;
-    top:53%;
-    font-size: 20px;
-    color:green; 
+  .el-menu--collapse{
+    width: 100px;
   }
 </style>

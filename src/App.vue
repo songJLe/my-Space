@@ -3,11 +3,15 @@
       <transition name="fade">
       <loading v-if="isLoading"></loading>
     </transition>
-      <el-aside width="350px">
+      <el-aside width=auto>
+        <div class="mouse" @mouseenter="isToggleHide" @mouseleave="isToggleShow" >
         <navlist :listarr="navArr"></navlist>
+        </div>
       </el-aside>
       <el-main>
-        <router-view></router-view>
+        <div @click="isToggleShow">
+          <router-view></router-view>
+        </div>
       </el-main>
     </el-container> 
 </template>
@@ -32,6 +36,14 @@ export default {
     navlist,
     Loading  
   },
+  methods: {
+    isToggleShow (){ 
+      this.$store.commit('mutations_toggleHide',true)
+    },
+    isToggleHide (){ 
+      this.$store.commit('mutations_toggleHide',false)
+    }
+  },
    computed:{
       ...mapState(["loadLength"]),//监听loadLength的变化
    },
@@ -42,13 +54,14 @@ export default {
             this.isLoading = false
           }, 3000);
         } 
-     }
+     },
+     
    },
 }
 </script>
 
 <style> 
-html,body{
+html,body,.mouse{
   height: 100%;
 }
 body{
@@ -57,17 +70,19 @@ body{
   padding: 0;
   background: rgb(220, 245, 241); 
 } 
+
 a {
   text-decoration: none;
 }
 .el-aside{
-  height: 800px;
+  height: 1000px;
   position: fixed;
-  top:-300px;
-  left: -30px;
+  top:-350px;
+  left: -120px;
   overflow: hidden;
   transform: rotate(45deg); 
   z-index: 99;
+  margin-left: -60px;
 }
 .el-main{
   text-align: center;

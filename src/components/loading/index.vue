@@ -1,7 +1,9 @@
 <template>
   <div class="loading">
     <div class="loadImg"></div>
-    <h1 class="oneShow">{{ msg }}</h1>
+    <el-row :gutter="10">
+    <el-col class="oneShow" :xs="10" :sm="10" :md="10" v-html="msg"  :style="styleObj"></el-col>
+    </el-row>
   </div>
 </template>
  
@@ -12,15 +14,18 @@ export default {
   data() {
     return {
       msg: '',
-      newMsg:'hey~hhhhhhh对于文本，我们可以再做一点微调',
+      newMsg:'',
       msgLength:0,
-      interval:null
+      interval:null,
+      weekdays:["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      styleObj:`color:#${Math.floor(Math.random()*256).toString()}`
     }
   },
   mounted() { 
     setTimeout(() => {
       this.lang()
     }, 1500)
+    this.loadingTime()
   },
   methods: {
     lang: function() { 
@@ -35,7 +40,25 @@ export default {
           _this.$store.commit('mutations_loadLength',false)
           clearInterval(_this.interval)
         } 
-      }, 50) 
+        _this.styleObj = `color:#${Math.floor(Math.random()*256).toString()}`
+      },80) 
+    },
+    loadingTime:function (params) {
+      var _this = this 
+      var dayOfWeekPastIndex = Math.floor(_this.weekdays.length * Math.random())
+      var dayOfWeekIndex = new Date().getDate()
+      var dayOfWeekPast = _this.weekdays[dayOfWeekPastIndex];
+      var dayOfWeek = _this.weekdays[dayOfWeekIndex];
+      var hourOfDay = new Date().getHours();
+      var timeOfDay
+      if ((hourOfDay >= 4) && (hourOfDay <= 11)) {
+        timeOfDay = "早上";
+      } else if ((hourOfDay >= 12) && (hourOfDay <= 16)) {
+        timeOfDay = "下午";
+      } else { 
+        timeOfDay = "晚上";
+      }
+      _this.newMsg = `hey~\n我们${dayOfWeekPast}是不是见过?\n^_^<br/>\n在这个${dayOfWeek}的${timeOfDay}\n要不要一起打一把游戏？`
     },
   }
 }
@@ -51,6 +74,9 @@ export default {
   z-index: 10000;
   background: rgb(160, 226, 215); 
 }
+.loading .el-row{
+  display: flex;
+}
 .loadImg{
   width: 100px;
   height: 100px;
@@ -59,9 +85,10 @@ export default {
   margin: 100px auto;
 }
 .oneShow {
-  width:600px;
   text-align: left;
   height: 30px;
   margin: 0 auto;
+  font-size: 24px;
+  line-height: 40px;
 }
 </style>
