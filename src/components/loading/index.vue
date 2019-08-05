@@ -41,7 +41,7 @@ export default {
           clearInterval(_this.interval)
         } 
         _this.styleObj = `color:#${Math.floor(Math.random()*256).toString()}`
-      },80) 
+      },150) 
     },
     loadingTime:function (params) {
       var _this = this 
@@ -82,9 +82,10 @@ export default {
   height: 100px;
   background: url('../../../static/images/loading-ball.gif') center center no-repeat ;
   background-size: cover;
-  margin: 100px auto;
+  margin: 10% auto;
 }
 .oneShow {
+  min-width: 60%;
   text-align: left;
   height: 30px;
   margin: 0 auto;
