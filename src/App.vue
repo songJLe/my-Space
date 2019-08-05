@@ -24,7 +24,7 @@ export default {
   name: 'app',
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
       navArr: [
         { title: 'one', url: '/' },
         { title: 'two', url: '/two' },
