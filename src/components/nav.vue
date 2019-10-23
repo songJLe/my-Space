@@ -1,7 +1,8 @@
 <template>
   <div class="nav">  
+   
   <nav>
-    <el-menu default-active="0" class="el-menu-vertical-demo" :collapse="toggleHides">
+    <el-menu :default-active="ins" class="el-menu-vertical-demo" :collapse="toggleHides">
       <el-menu-item v-for="(item, index) in navArr" :index="index.toString()" :key="index">
         <router-link :to="item.url" style="color:#000;">
         <i class="el-icon-menu"></i> 
@@ -9,7 +10,12 @@
         </router-link>
       </el-menu-item>
     </el-menu>
-    </nav>
+    </nav> 
+      <!-- <el-main>
+        <div @click="isToggleShow">
+          <router-view></router-view>
+        </div>
+      </el-main> -->
   </div>
 </template>
 
@@ -17,20 +23,26 @@
 import {mapState} from 'vuex'
 export default {
   name: 'Nav',
-  props: ['listarr'],
   data() {
-    return {
-      navArr: this.listarr,
-      toggleHides: ''
+    return { 
+      toggleHides: '', 
+      navArr: [
+        { title: 'home', url: '/' },
+        { title: 'place', url: '/place' },
+        { title: 'three', url: '/three' }
+      ], 
+      ins:this.$route.name
     }
   },
+  mounted() {  
+  },
   methods: {
-    // isToggleShow (){ 
-    //   this.toggleHide = true 
-    // },
-    // isToggleHide (){ 
-    //   this.toggleHide = false
-    // }
+     isToggleShow (){ 
+      this.$store.commit('mutations_toggleHide',true)
+    },
+    isToggleHide (){ 
+      this.$store.commit('mutations_toggleHide',false)
+    },  
   },
   computed:{
       ...mapState(["toggleHide"]),//监听toggleHide的变化
@@ -42,16 +54,15 @@ export default {
   },
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+    
+<style>
   .nav,nav,nav ul{ 
     height: 100%;
   }
-  nav ul li:first-child{
+  .nav ul li:first-child{
     margin-top: 300px;
   }
-  nav ul li{
+  .nav ul li{
     width: 60%;
     transform: rotate(-45deg);
     float: right;

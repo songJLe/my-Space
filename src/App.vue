@@ -3,37 +3,25 @@
       <transition name="fade">
       <loading v-if="isLoading"></loading>
     </transition>
-      <el-aside width=auto>
-        <div class="mouse" @mouseenter="isToggleHide" @mouseleave="isToggleShow" >
-        <navlist :listarr="navArr"></navlist>
-        </div>
+      <el-aside width=auto>  
       </el-aside>
-      <el-main>
-        <div @click="isToggleShow">
-          <router-view></router-view>
-        </div>
+      <el-main> 
+          <router-view></router-view> 
       </el-main>
     </el-container> 
 </template>
 
 <script>
-import Loading from '@/components/loading/index'
-import navlist from '@/components/nav'
+import Loading from '@/components/loading/index' 
 import {mapState} from 'vuex'
 export default {
   name: 'app',
   data() {
     return {
-      isLoading: true,
-      navArr: [
-        { title: 'one', url: '/' },
-        { title: 'two', url: '/two' },
-        { title: 'three', url: '/three' }
-      ]
+      isLoading: true,//是否开启loading状态 
     }
   },
-  components: {
-    navlist,
+  components: { 
     Loading  
   },
   methods: {

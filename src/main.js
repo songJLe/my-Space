@@ -5,7 +5,7 @@ import router from './router'
 import store from './vuex/store.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-//import 'element-ui/lib/theme-chalk/display.css';引入此文件，即可使用断点隐藏 内置过渡动画
+//import 'element-ui/lib/theme-chalk/display.css';引入此文件，即可使用断点隐藏 内置过渡动画 
 Vue.use(ElementUI)
 Vue.use(Vuex)
 new Vue({
