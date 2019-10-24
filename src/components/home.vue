@@ -55,7 +55,7 @@ export default {
   name: 'home',
   data() {
     return {
-      bgImgArr:['../../static/images/bg11.jpg','../../static/images/bg2.jpg','../../static/images/bg3.jpg','../../static/images/bg4.jpg'],
+      bgImgArr:['static/images/bg11.jpg','static/images/bg2.jpg','static/images/bg3.jpg','static/images/bg4.jpg'],
     }
   },
   components: {
